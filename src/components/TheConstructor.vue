@@ -11,6 +11,7 @@
         </div>
       </BaseButton>
       <div class="flex items-center gap-3 sm:gap-2">
+        <a href="/tattoo/img2.png" download="img" target="_blank">get img</a>
         <BaseButton @click="onSave">Download result</BaseButton>
         <BaseButton @click="onReset">Reset</BaseButton>
       </div>
