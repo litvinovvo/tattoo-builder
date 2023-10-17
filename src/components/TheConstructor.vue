@@ -141,6 +141,7 @@ function onSave() {
 
     const link = document.createElement('a')
     link.download = 'tattoo.jpeg'
+    link.target = '_blank'
     link.href = data
     link.click()
   }
