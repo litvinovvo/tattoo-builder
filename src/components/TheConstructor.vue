@@ -15,7 +15,7 @@
           <input type="file" id="file" name="file" />
           <input type="submit" />
         </form> -->
-        <BaseButton @click="onSave">Download result</BaseButton>
+        <BaseButton v-if="showDownload" @click="onSave">Download result</BaseButton>
         <BaseButton @click="onReset">Reset</BaseButton>
       </div>
     </div>
@@ -93,12 +93,14 @@ import { onMounted, ref, computed } from 'vue'
 import * as fabric from 'fabric'
 import BaseButton from '@/components/BaseButton.vue'
 import BaseCheckbox from '@/components/BaseCheckbox.vue'
+import isWebview from 'is-ua-webview'
 
 const canvasElement = ref<null | HTMLCanvasElement>(null)
 const canvasContainer = ref<null | HTMLDivElement>(null)
 const isMenuOpen = ref(true)
 const filter = ref<string[]>([])
 let canvas: undefined | fabric.Canvas
+const showDownload = !isWebview(navigator.userAgent)
 
 const images = ref<ConfigImage[]>([])
 const base = import.meta.env.VITE_BASE
@@ -154,7 +156,7 @@ async function onSave() {
 
     const formData = new FormData()
     formData.append("file", file)
-    const request = await fetch('http://77.246.100.44:5001/api/file/upload', { method:'POST', body: formData })
+    const request = await fetch('https://77.246.100.44:5001/api/file/upload', { method:'POST', body: formData })
     const response = await request.text()
 
     console.log('uploaded', response)
@@ -162,7 +164,7 @@ async function onSave() {
     const link = document.createElement('a')
     link.download = name
     link.target = '_blank'
-    link.href = `http://77.246.100.44:5001/download/${name}`
+    link.href = `https://77.246.100.44:5001/download/${name}`
     link.click()
   }
 }
