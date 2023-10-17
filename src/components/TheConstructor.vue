@@ -11,7 +11,7 @@
         </div>
       </BaseButton>
       <div class="flex items-center gap-3 sm:gap-2">
-        <BaseButton look="secondary" href="https://notaneimu.space" target="_blank">
+        <BaseButton look="secondary" href="https://notaneimu.space" target="_system">
           Open in browser
         </BaseButton>
         <BaseButton @click="onSave">Download result</BaseButton>
