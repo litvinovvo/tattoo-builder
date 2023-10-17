@@ -11,9 +11,7 @@
         </div>
       </BaseButton>
       <div class="flex items-center gap-3 sm:gap-2">
-        <BaseButton look="secondary" @click="onOpen">
-          window open
-        </BaseButton>
+        <a href="https://google.com" onclick="window.open('https://google.com', '_system'); return false;">Google</a>
         <BaseButton @click="onSave">Download result</BaseButton>
         <BaseButton @click="onReset">Reset</BaseButton>
       </div>
