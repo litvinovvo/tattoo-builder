@@ -11,6 +11,10 @@
         </div>
       </BaseButton>
       <div class="flex items-center gap-3 sm:gap-2">
+        <!-- <form action="http://77.246.100.44:5001/api/file/upload" method="post" enctype="multipart/form-data">
+          <input type="file" id="file" name="file" />
+          <input type="submit" />
+        </form> -->
         <BaseButton @click="onSave">Download result</BaseButton>
         <BaseButton @click="onReset">Reset</BaseButton>
       </div>
@@ -131,7 +135,7 @@ let draggingElement = null as null | HTMLImageElement
 function onCanvasClick() {
   isMenuOpen.value = false
 }
-function onSave() {
+async function onSave() {
   if (canvas) {
     const data = canvas?.toDataURL({
       format: 'jpeg',
@@ -139,10 +143,26 @@ function onSave() {
       multiplier: 2
     })
 
+    const blobRequest = await fetch(data)
+    const blob = await blobRequest.blob()
+
+    const name = `tattoo-${new Date().getTime()}.jpg`
+    console.log('name', name)
+    const file = new File([blob], name, {
+      type: 'image/jpeg',
+    })
+
+    const formData = new FormData()
+    formData.append("file", file)
+    const request = await fetch('http://77.246.100.44:5001/api/file/upload', { method:'POST', body: formData })
+    const response = await request.text()
+
+    console.log('uploaded', response)
+
     const link = document.createElement('a')
-    link.download = 'tattoo.jpeg'
-    link.target = '_system'
-    link.href = data
+    link.download = name
+    link.target = '_blank'
+    link.href = `http://77.246.100.44:5001/download/${name}`
     link.click()
   }
 }
