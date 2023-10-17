@@ -11,8 +11,8 @@
         </div>
       </BaseButton>
       <div class="flex items-center gap-3 sm:gap-2">
-        <BaseButton look="secondary" href="https://notaneimu.space" target="_system">
-          Open in browser
+        <BaseButton look="secondary" @click="onOpen">
+          window open
         </BaseButton>
         <BaseButton @click="onSave">Download result</BaseButton>
         <BaseButton @click="onReset">Reset</BaseButton>
@@ -164,6 +164,10 @@ function onImageClick(e: MouseEvent) {
     canvas?.add(newImage)
     isMenuOpen.value = false
   }
+}
+
+function onOpen() {
+  window.open('https://notaneimu.space', '_system')
 }
 
 function handleDragStart(e: DragEvent) {
