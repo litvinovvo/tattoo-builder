@@ -11,7 +11,9 @@
         </div>
       </BaseButton>
       <div class="flex items-center gap-3 sm:gap-2">
-        <a href="/tattoo/img2.png" download="img" target="_blank">get img</a>
+        <BaseButton look="secondary" href="https://notaneimu.space" target="_blank">
+          Open in browser
+        </BaseButton>
         <BaseButton @click="onSave">Download result</BaseButton>
         <BaseButton @click="onReset">Reset</BaseButton>
       </div>
@@ -117,7 +119,7 @@ async function loadConfig() {
   const configRequest = await fetch('config.json')
   const config = await configRequest.json()
 
-  config.forEach((image: ConfigImage) => images.value.push({ ...image, key: Symbol('image-key')}))
+  config.forEach((image: ConfigImage) => images.value.push({ ...image, key: Symbol('image-key') }))
   images.value.concat(config)
 }
 
@@ -262,7 +264,6 @@ function initCanvas() {
   }
 
   updateCanvasSize()
-
 
   const deleteIcon =
     "data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M15.289 15.9961L-1.44839e-05 0.707107L0.707092 0L15.9961 15.289L15.289 15.9961Z' fill='%23B2CCFF'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M0.707107 15.9961L15.9961 0.707107L15.289 0L5.23321e-07 15.289L0.707107 15.9961Z' fill='%23B2CCFF'/%3E%3C/svg%3E%0A"
