@@ -15,7 +15,7 @@
           <input type="file" id="file" name="file" />
           <input type="submit" />
         </form> -->
-        <BaseButton v-if="showDownload" @click="onSave">Download result</BaseButton>
+        <BaseButton @click="onSave">Download result</BaseButton>
         <BaseButton @click="onReset">Reset</BaseButton>
       </div>
     </div>
