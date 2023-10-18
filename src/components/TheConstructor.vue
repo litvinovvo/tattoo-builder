@@ -156,7 +156,7 @@ async function onSave() {
 
     const formData = new FormData()
     formData.append("file", file)
-    const request = await fetch('https://77.246.100.44:5001/api/file/upload', { method:'POST', body: formData })
+    const request = await fetch('https://api.notaneimu.space:5001/api/file/upload', { method:'POST', body: formData })
     const response = await request.text()
 
     console.log('uploaded', response)
@@ -164,7 +164,7 @@ async function onSave() {
     const link = document.createElement('a')
     link.download = name
     link.target = '_blank'
-    link.href = `https://77.246.100.44:5001/download/${name}`
+    link.href = `https://api.notaneimu.space:5001/download/${name}`
     link.click()
   }
 }
