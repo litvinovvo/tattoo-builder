@@ -163,8 +163,8 @@ async function onSave() {
 
     const link = document.createElement('a')
     link.download = name
-    link.target = '_blank'
     link.href = `https://api.notaneimu.space:5001/download/${name}`
+    alert(`click on ${link.href}`)
     link.click()
   }
 }
