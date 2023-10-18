@@ -145,27 +145,35 @@ async function onSave() {
       multiplier: 2
     })
 
-    const blobRequest = await fetch(data)
-    const blob = await blobRequest.blob()
-
-    const name = `tattoo-${new Date().getTime()}.jpg`
-    console.log('name', name)
-    const file = new File([blob], name, {
-      type: 'image/jpeg',
-    })
-
-    const formData = new FormData()
-    formData.append("file", file)
-    const request = await fetch('https://api.notaneimu.space:5001/api/file/upload', { method:'POST', body: formData })
-    const response = await request.text()
-
-    console.log('uploaded', response)
-
-    const link = document.createElement('a')
-    link.download = name
-    link.href = `https://api.notaneimu.space:5001/download/${name}`
-    alert(`click on ${link.href}`)
-    link.click()
+    try {
+      const blobRequest = await fetch(data)
+      const blob = await blobRequest.blob()
+  
+      const name = `tattoo-${new Date().getTime()}.jpg`
+      console.log('name', name)
+      const file = new File([blob], name, {
+        type: 'image/jpeg',
+      })
+  
+      alert('got file')
+  
+      const formData = new FormData()
+      formData.append("file", file)
+      alert('start upload')
+      const request = await fetch('https://api.notaneimu.space:5001/api/file/upload', { method:'POST', body: formData })
+      const response = await request.text()
+  
+      alert('uploaded')
+      console.log('uploaded', response)
+  
+      const link = document.createElement('a')
+      link.download = name
+      link.href = `https://api.notaneimu.space:5001/download/${name}`
+      alert(`click on ${link.href}`)
+      link.click()
+    } catch (error) {
+      alert(error)
+    }
   }
 }
 
